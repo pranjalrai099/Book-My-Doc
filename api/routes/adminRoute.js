@@ -2,7 +2,7 @@ import express from 'express'
 import { addDoctor,admindashboard,allDoctors,appointmentAdmin,cancelAppointmentAdmin,loginAdmin } from '../controllers/adminController.js'
 import upload from '../middlewares/multer.js'
 import authAdmin from '../middlewares/authadmin.js'
-import { changeavailability } from '../controllers/doccontroller.js'
+import { changeavailability } from '../controllers/docController.js'
 import { cancelAppointment } from '../controllers/UserController.js'
 
 const adminRouter=express.Router()
