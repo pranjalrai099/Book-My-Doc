@@ -77,7 +77,7 @@ const Navbar = () => {
       toast.error('Admin URL is not configured!');
     }
   }}
-  className="ml-3 p-2 rounded-full border border-blue-500 text-xl w-32"
+  className="p-2 rounded-full border border-blue-500 text-xl w-32"
 >
   Admin
 </button>
