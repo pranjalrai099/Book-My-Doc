@@ -250,4 +250,80 @@ const verifyRazorpay = async (req, res) => {
       res.status(500).json({ success: false, message: "Internal server error." });
     }
   };
-export { registerUser, loginUser, getProfile,updateUser,BookAppointment,listappointment,cancelAppointment,paymentRazorpay,verifyRazorpay }
+const DonationReq = async (req, res) => {
+    try {
+        const { firstname, lastname, email, phone, age, gender, donortype, organ, description,upiid } = req.body;
+        const imageFile = req.file;
+        console.log(req.body);
+
+        // Validate required fields
+        if (!firstname || !lastname || !email || !phone || !age || !gender || !donortype || !upiid) {
+            return res.status(400).json({ success: false, message: "All required fields must be filled" });
+        }
+
+        // Validate email format
+        if (!validator.isEmail(email)) {
+            return res.status(400).json({ success: false, message: "Invalid email format" });
+        }
+
+        // Validate age as a number
+        if (isNaN(age) || age < 1) {
+            return res.status(400).json({ success: false, message: "Invalid age" });
+        }
+        
+        let imageUrl = "";
+        if (imageFile) {
+            // Upload image to Cloudinary
+            const imageUpload = await cloudinary.uploader.upload(imageFile.path, { resource_type: 'image' });
+            imageUrl = imageUpload.secure_url;
+        }
+        
+        // Create new donation request
+        const newDonation = new DonationModel({
+            firstname,
+            lastname,
+            email,
+            phone,
+            age,
+            gender,
+            donortype,
+            organ,
+            image: imageUrl,
+            description,
+            upiid
+        });
+
+        // Save to database
+        await newDonation.save();
+
+        res.status(201).json({ success: true, message: "Donation request submitted successfully", donation: newDonation });
+    } catch (error) {
+        console.error("Error in DonationReq:", error.message);
+        res.status(500).json({ success: false, message: "Server Error", error: error.message });
+    }
+};
+const GetDonationData = async (req, res) => {
+    try {
+        const donations = await DonationModel.find().sort({ createdAt: -1 });
+        res.json({ success: true, donations });
+    } catch (error) {
+        console.error("Error in GetDonationData:", error.message);
+        res.status(500).json({ success: false, message: "Server Error", error: error.message });
+    }
+};
+const GetPersonalDonation=async(req,res)=>{
+    try {
+        const { donationId } = req.body;
+        const donation = await DonationModel.findById(donationId);
+
+        if (!donation) {
+            return res.status(404).json({ message: 'Donation not found' });
+        }
+
+        res.json(donation);
+    } catch (error) {
+        console.error('Error fetching donation:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+}
+export { registerUser, loginUser, getProfile,updateUser,BookAppointment,listappointment,cancelAppointment,paymentRazorpay,verifyRazorpay,DonationReq,GetDonationData,GetPersonalDonation }
