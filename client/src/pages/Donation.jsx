@@ -24,7 +24,7 @@ export const DonationPage = () => {
 
   return (
     <div className="min-h-screen p-10">
-      <h1 className="text-4xl  text-center text-gray-800 mb-10">Available Donations</h1>
+      <h1 className="text-4xl  text-center text-gray-800 mb-10">Hope Hub</h1>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-14">
         {donations.length > 0 ? (
