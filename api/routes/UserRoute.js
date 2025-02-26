@@ -12,4 +12,7 @@ UserRouter.get('/appointment',authUser,listappointment)
 UserRouter.post('/cancel-appointment',authUser,cancelAppointment)
 UserRouter.post('/payment-razorpay',authUser,paymentRazorpay)
 UserRouter.post('/verify-razorpay',authUser,verifyRazorpay)
+UserRouter.post('/donation-user',upload.single('image'),authUser,DonationReq)
+UserRouter.get('/donation-get',GetDonationData)
+UserRouter.post('/donation-getbyId',GetPersonalDonation);
 export default UserRouter
