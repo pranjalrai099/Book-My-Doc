@@ -13,6 +13,8 @@ import Navbar from './components/Navbar';
 import FooterPage from './components/Footer';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { DonationPage } from './pages/Donation';
+import { DonationPersonal } from './pages/DonationPersonal';
 const App = () => {
   return (
     <div className='mx-4 sm:mx-[10%]'>
@@ -21,6 +23,8 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Homepage/>} />
         <Route path='/doctors' element={<DoctorsPage />} />
+        <Route path='/donation' element={<DonationPage />} />
+        <Route path='/donate/:donationId' element={<DonationPersonal />} />
         <Route path='/doctors/:speciality' element={<DoctorsPage />} />
         <Route path='/login' element={<Login />} />
         <Route path='/about' element={<About />} />
