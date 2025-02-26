@@ -41,6 +41,10 @@ const Navbar = () => {
                     <li className='py-1'>CONTACT</li>
                     <hr className='border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden' />
                 </NavLink>
+                <NavLink to={'/donation'}>
+                    <li className='py-1'>DONATION</li>
+                    <hr className='border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden' />
+                </NavLink>
             </ul>
             <div className='flex items-center gap-4'>
                 {token && userdata ?
@@ -67,6 +71,7 @@ const Navbar = () => {
                 <NavLink onClick={()=>setshowMenu(false)} to={'/doctors'} ><p className='px-4 py-2 rounded inline-block'>All DOCTORS</p></NavLink>
                 <NavLink onClick={()=>setshowMenu(false)} to={'/about'} ><p className='px-4 py-2 rounded inline-block'>ABOUT</p></NavLink>
                 <NavLink onClick={()=>setshowMenu(false)} to={'/contact'} ><p className='px-4 py-2 rounded inline-block'>CONTACT</p></NavLink>
+                <NavLink onClick={()=>setshowMenu(false)} to={'/donation'} ><p className='px-4 py-2 rounded inline-block'>DONATION</p></NavLink>
                 </ul>
             </div>
             <button
